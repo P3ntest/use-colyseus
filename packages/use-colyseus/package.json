@@ -14,6 +14,10 @@
     "publish-package": "pnpm run build && pnpm publish"
   },
   "author": "Pedro Fontoura",
+  "contributors": [
+    "Pedro Fontoura",
+    "Julius van Voorden (github/p3ntest)"
+  ],
   "keywords": [
     "colyseus",
     "multiplayer",
