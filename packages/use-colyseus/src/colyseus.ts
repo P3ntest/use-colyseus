@@ -23,7 +23,7 @@ export const colyseus = <S = Schema>(
     try {
       const room = await client.joinOrCreate<S>(roomName, options, schema);
 
-      setCurrentRoom(room);
+      await setCurrentRoom(room);
     } catch (e) {
       console.error("Failed to connect to Colyseus!");
       console.log(e);
@@ -32,7 +32,11 @@ export const colyseus = <S = Schema>(
     }
   };
 
-  const setCurrentRoom = (room: Room<S>) => {
+  const setCurrentRoom = async (room: Room<S>) => {
+    if (roomStore.get()) {
+      await roomStore.get()?.leave(true);
+    }
+
     roomStore.set(room);
     stateStore.set(room.state);
 
