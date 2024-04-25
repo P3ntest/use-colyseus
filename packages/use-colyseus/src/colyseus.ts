@@ -85,7 +85,7 @@ export const colyseus = <S = Schema>(
     });
   };
 
-  const disconnectFromColyseus = async () => {
+  const disconnectFromColyseus = async (consented?: boolean) => {
     const room = roomStore.get();
     if (!room) return;
 
@@ -93,7 +93,7 @@ export const colyseus = <S = Schema>(
     stateStore.set(undefined);
 
     try {
-      await room.leave();
+      await room.leave(consented);
       console.log("Disconnected from Colyseus!");
     } catch {}
   };
